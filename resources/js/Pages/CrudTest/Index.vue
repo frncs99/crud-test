@@ -34,9 +34,11 @@ const deleteCrudTest = async (id) => {
             <!-- Page Heading -->
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    ITEM LIST
+                    <Link :href="route('web.crud.test.index')">
+                        <span>ITEM LIST</span>
+                    </Link>
                     <span class="float-right">
-                        <Link href="/crud-test/create">
+                        <Link :href="route('web.crud.test.create')">
                             <Add />
                         </Link>
                     </span>

@@ -52,9 +52,11 @@ const submitCrudTest = async () => {
             <!-- Page Heading -->
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    ITEM DETAIL
+                    <Link :href="route('web.crud.test.create')">
+                        <span>ITEM DETAIL</span>
+                    </Link>
                     <span class="float-right">
-                        <Link href="/crud-test">
+                        <Link :href="route('web.crud.test.index')">
                             <Back />
                         </Link>
                     </span>
