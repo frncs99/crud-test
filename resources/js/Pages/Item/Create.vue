@@ -56,7 +56,7 @@ const submitItem = async () => {
                         <span>ITEM DETAIL</span>
                     </Link>
                     <span class="float-right">
-                        <Link :href="route('web.item.index')">
+                        <Link title="Go back." :href="route('web.item.index')">
                             <Back />
                         </Link>
                     </span>

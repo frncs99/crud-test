@@ -38,7 +38,7 @@ const deleteItem = async (id) => {
                         <span>ITEM LIST</span>
                     </Link>
                     <span class="float-right">
-                        <Link :href="route('web.item.create')">
+                        <Link title="Add item here." :href="route('web.item.create')">
                             <Add />
                         </Link>
                     </span>
@@ -107,8 +107,8 @@ const deleteItem = async (id) => {
                                             ></td>
                                             <td class="px-6 py-4">
                                                 <table>
-                                                    <td class="p-2"><Edit /></td>
-                                                    <td class="p-2 cursor-pointer"><Delete @click="deleteItem(value.id)" /></td>
+                                                    <td class="p-2" title="Edit item here."><Edit /></td>
+                                                    <td class="p-2 cursor-pointer" title="Delete item here."><Delete @click="deleteItem(value.id)" /></td>
                                                 </table>
                                             </td>
                                         </tr>
