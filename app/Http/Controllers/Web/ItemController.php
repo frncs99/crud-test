@@ -24,10 +24,10 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        $item = $this->modelService->get();
+        $items = $this->modelService->get();
 
         return Inertia::render('Item/Index', [
-            'item' => $item,
+            'items' => $items,
         ]);
     }
 

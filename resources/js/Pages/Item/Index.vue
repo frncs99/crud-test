@@ -6,7 +6,7 @@ import Edit from '@/Icons/Edit.vue';
 import { reactive } from 'vue';
 
 defineProps({
-    item: Array|Object,
+    items: Array|Object,
     flash: Array|Object,
 });
 
@@ -95,8 +95,8 @@ const deleteItem = async (id) => {
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody v-if="item.length > 0">
-                                        <tr class="bg-white border-b" v-for="value, key in item" :key="key">
+                                    <tbody v-if="items.length > 0">
+                                        <tr class="bg-white border-b" v-for="value, key in items" :key="key">
                                             <td class="px-6 py-4">{{ value.id }}</td>
                                             <td class="px-6 py-4">{{ value.name }}</td>
                                             <td class="px-6 py-4">{{ value.description }}</td>
@@ -107,7 +107,11 @@ const deleteItem = async (id) => {
                                             ></td>
                                             <td class="px-6 py-4">
                                                 <table>
-                                                    <td class="p-2" title="Edit item here."><Edit /></td>
+                                                    <td class="p-2 cursor-pointer" title="Edit item here.">
+                                                        <Link :href="route('web.item.edit', value.id)">
+                                                            <Edit />
+                                                        </Link>
+                                                    </td>
                                                     <td class="p-2 cursor-pointer" title="Delete item here."><Delete @click="deleteItem(value.id)" /></td>
                                                 </table>
                                             </td>
