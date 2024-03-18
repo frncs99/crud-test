@@ -15,8 +15,8 @@ return [
 
     'item' => [
         'success' => [
-            'store' => 'Successfully created item.',
-            'update' => 'Successfully updated item.',
+            'store' => 'Successfully added item.',
+            'update' => 'Successfully edited item.',
             'destroy' => 'Successfully deleted item.',
         ],
         'failed' => [
