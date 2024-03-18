@@ -1,13 +1,30 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, router } from '@inertiajs/vue3';
 import Add from '@/Icons/Add.vue';
 import Delete from '@/Icons/Delete.vue';
 import Edit from '@/Icons/Edit.vue';
+import { reactive } from 'vue';
 
 defineProps({
     crudTest: Array|Object,
     flash: Array|Object,
 });
+
+const errorMessage = reactive({
+    'delete': null
+});
+
+const deleteCrudTest = async (id) => {
+    await axios
+        .delete(route('web.crud.test.destroy', id))
+        .then((res) => {
+            router.visit(route('web.crud.test.index'));
+        })
+        .catch((err) => {
+            errorMessage.delete = err.response.data
+            console.error(err);
+        });
+};
 </script>
 
 <template>
@@ -28,6 +45,18 @@ defineProps({
 
             <!-- Page Content -->
             <main>
+                <div v-if="errorMessage.delete" class="mt-8">    
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="relative overflow-x">
+                            <div class="bg-red-500 text-white px-4 py-3 flex items-center justify-between" role="alert">
+                                <div class="flex">
+                                    <p>{{ errorMessage.delete }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div v-if="flash.message" class="mt-8">    
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="relative overflow-x">
@@ -77,7 +106,7 @@ defineProps({
                                             <td class="px-6 py-4">
                                                 <table>
                                                     <td class="p-2"><Edit /></td>
-                                                    <td class="p-2"><Delete /></td>
+                                                    <td class="p-2 cursor-pointer"><Delete @click="deleteCrudTest(value.id)" /></td>
                                                 </table>
                                             </td>
                                         </tr>
