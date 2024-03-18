@@ -119,7 +119,11 @@ const deleteItem = async (id) => {
                                     </tbody>
                                     <tbody v-else>
                                         <tr class="bg-white border-b text-center">
-                                            <td class="px-6 py-4" colspan="5">NO DATA FOUND.</td>
+                                            <td class="px-6 py-4" colspan="5">
+                                                NO DATA FOUND.
+                                                <br />
+                                                Click the Add Icon in the upper right to add items.
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
