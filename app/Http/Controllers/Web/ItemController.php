@@ -6,6 +6,7 @@ use App\Actions\Item\ItemService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Item\DeleteRequest;
 use App\Http\Requests\Item\StoreRequest;
+use App\Http\Requests\Item\UpdateRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -71,6 +72,30 @@ class ItemController extends Controller
         }
 
         session()->flash('message', __('messages.item.success.destroy'));
+
+        return;
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $item = $this->modelService->find($id);
+
+        return Inertia::render('Item/Edit', [
+            'item' => $item,
+        ]);
+    }
+
+    /**
+     * Update a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Item\UpdateRequest  $request
+     * @return void
+     */
+    public function update(UpdateRequest $request, $id)
+    {
+        $this->modelService->store($request, $id);
+
+        session()->flash('message', __('messages.item.success.update'));
 
         return;
     }

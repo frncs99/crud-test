@@ -22,6 +22,17 @@ class BaseService
     }
 
     /**
+     * get record from the table using
+     * the incremental id
+     *
+     * @return Model $model instance
+     */
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
+    /**
      * Retrieve all records from the database.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
