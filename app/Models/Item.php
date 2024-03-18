@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class CrudTest extends BaseModel
+class Item extends BaseModel
 {
     /**
      * The attributes that are mass assignable.

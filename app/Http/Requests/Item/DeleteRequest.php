@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\CrudTest;
+namespace App\Http\Requests\Item;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -38,7 +38,7 @@ class DeleteRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required', 'integer', 'exists:crud_tests,id']
+            'id' => ['required', 'integer', 'exists:items,id']
         ];
     }
 }

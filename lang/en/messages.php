@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'crud_test' => [
+    'item' => [
         'success' => [
             'store' => 'Successfully created item.',
             'update' => 'Successfully updated item.',

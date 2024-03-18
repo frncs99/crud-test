@@ -6,7 +6,7 @@ import Edit from '@/Icons/Edit.vue';
 import { reactive } from 'vue';
 
 defineProps({
-    crudTest: Array|Object,
+    item: Array|Object,
     flash: Array|Object,
 });
 
@@ -14,11 +14,11 @@ const errorMessage = reactive({
     'delete': null
 });
 
-const deleteCrudTest = async (id) => {
+const deleteItem = async (id) => {
     await axios
-        .delete(route('web.crud.test.destroy', id))
+        .delete(route('web.item.destroy', id))
         .then((res) => {
-            router.visit(route('web.crud.test.index'));
+            router.visit(route('web.item.index'));
         })
         .catch((err) => {
             errorMessage.delete = err.response.data
@@ -28,17 +28,17 @@ const deleteCrudTest = async (id) => {
 </script>
 
 <template>
-    <Head title="Crud Test" />
+    <Head title="ITEM" />
 
     <div class="min-h-screen bg-gray-100">
             <!-- Page Heading -->
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <Link :href="route('web.crud.test.index')">
+                    <Link :href="route('web.item.index')">
                         <span>ITEM LIST</span>
                     </Link>
                     <span class="float-right">
-                        <Link :href="route('web.crud.test.create')">
+                        <Link :href="route('web.item.create')">
                             <Add />
                         </Link>
                     </span>
@@ -95,8 +95,8 @@ const deleteCrudTest = async (id) => {
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody v-if="crudTest.length > 0">
-                                        <tr class="bg-white border-b" v-for="value, key in crudTest" :key="key">
+                                    <tbody v-if="item.length > 0">
+                                        <tr class="bg-white border-b" v-for="value, key in item" :key="key">
                                             <td class="px-6 py-4">{{ value.id }}</td>
                                             <td class="px-6 py-4">{{ value.name }}</td>
                                             <td class="px-6 py-4">{{ value.description }}</td>
@@ -108,7 +108,7 @@ const deleteCrudTest = async (id) => {
                                             <td class="px-6 py-4">
                                                 <table>
                                                     <td class="p-2"><Edit /></td>
-                                                    <td class="p-2 cursor-pointer"><Delete @click="deleteCrudTest(value.id)" /></td>
+                                                    <td class="p-2 cursor-pointer"><Delete @click="deleteItem(value.id)" /></td>
                                                 </table>
                                             </td>
                                         </tr>

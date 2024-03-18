@@ -1,10 +1,7 @@
 <?php
 
-use App\Http\Controllers\Web\CrudTestController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\Web\ItemController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +14,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::as('web.crud.test.')
-    ->prefix('crud-test')
-    ->controller(CrudTestController::class)
+Route::as('web.item.')
+    ->prefix('item')
+    ->controller(ItemController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');

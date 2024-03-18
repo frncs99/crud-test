@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\CrudTest;
+namespace App\Http\Requests\Item;
 
 use Illuminate\Foundation\Http\FormRequest;
 

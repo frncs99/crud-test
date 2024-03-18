@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Actions\CrudTest\CrudTestService;
+use App\Actions\Item\ItemService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CrudTest\DeleteRequest;
-use App\Http\Requests\CrudTest\StoreRequest;
+use App\Http\Requests\Item\DeleteRequest;
+use App\Http\Requests\Item\StoreRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class CrudTestController extends Controller
+class ItemController extends Controller
 {
     /**
      * Class construct
      */
-    public function __construct(CrudTestService $modelService)
+    public function __construct(ItemService $modelService)
     {
         $this->modelService = $modelService;
     }
@@ -24,10 +24,10 @@ class CrudTestController extends Controller
      */
     public function index(Request $request)
     {
-        $crudTest = $this->modelService->get();
+        $item = $this->modelService->get();
 
-        return Inertia::render('CrudTest/Index', [
-            'crudTest' => $crudTest,
+        return Inertia::render('Item/Index', [
+            'item' => $item,
         ]);
     }
 
@@ -38,20 +38,20 @@ class CrudTestController extends Controller
      */
     public function create()
     {
-        return Inertia::render('CrudTest/Create');
+        return Inertia::render('Item/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\CrudTest\StoreRequest  $request
+     * @param  \App\Http\Requests\Item\StoreRequest  $request
      * @return void
      */
     public function store(StoreRequest $request)
     {
         $this->modelService->store($request);
 
-        session()->flash('message', __('messages.crud_test.success.store'));
+        session()->flash('message', __('messages.item.success.store'));
 
         return;
     }
@@ -59,7 +59,7 @@ class CrudTestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Requests\CrudTest\DeleteRequest  $request
+     * @param  \App\Http\Requests\Item\DeleteRequest  $request
      * @return \Illuminate\Http\Response|void
      */
     public function destroy(DeleteRequest $request)
@@ -67,10 +67,10 @@ class CrudTestController extends Controller
         $deleted = $this->modelService->delete($request->id);
 
         if (!$deleted) {
-            return response(__('messages.crud_test.failed.destroy'), 400);
+            return response(__('messages.item.failed.destroy'), 400);
         }
 
-        session()->flash('message', __('messages.crud_test.success.destroy'));
+        session()->flash('message', __('messages.item.success.destroy'));
 
         return;
     }

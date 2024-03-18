@@ -17,8 +17,8 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    // for the sake of crud-test, landing will be redirected to crud-test route
-    return Redirect('/crud-test');
+    // for the sake of crud test, landing will be redirected to item route
+    return Redirect(route('web.item.index'));
 
     // disable default Welcome Page
     // return Inertia::render('Welcome', [

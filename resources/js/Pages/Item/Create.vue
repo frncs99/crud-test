@@ -4,59 +4,59 @@ import { reactive } from 'vue';
 import Back from '@/Icons/Back.vue';
 import Spinner from '@/Icons/Spinner.vue';
 
-const crudTest = reactive({
+const item = reactive({
     name: '',
     description: '',
     is_enabled: true,
 });
 
-const crudTestErrors = reactive({
+const itemErrors = reactive({
     name: '',
     description: '',
     is_enabled: '',
 });
 
-const submitCrudTest = async () => {
+const submitItem = async () => {
     // clear errors
-    crudTestErrors.name = crudTestErrors.description = crudTestErrors.is_enabled = '';
+    itemErrors.name = itemErrors.description = itemErrors.is_enabled = '';
 
     // disable submit button, to prevent duplicates
-    document.getElementById('crudTestStoreBtn').disabled = true;
+    document.getElementById('itemStoreBtn').disabled = true;
 
     // show spinner
-    document.getElementById('crudTestStoreBtnSpinner').classList.remove('hidden');
+    document.getElementById('itemStoreBtnSpinner').classList.remove('hidden');
     
     await axios
-        .post(route('web.crud.test.store'), crudTest)
+        .post(route('web.item.store'), item)
         .then((res) => {
-            router.visit(route('web.crud.test.index'));
+            router.visit(route('web.item.index'));
         })
         .catch((err) => {
-            crudTestErrors.name = err.response.data.errors.name;
-            crudTestErrors.description = err.response.data.errors.description;
-            crudTestErrors.is_enabled = err.response.data.errors.is_enabled;
+            itemErrors.name = err.response.data.errors.name;
+            itemErrors.description = err.response.data.errors.description;
+            itemErrors.is_enabled = err.response.data.errors.is_enabled;
             
             // enable submit button, for resubmit
-            document.getElementById('crudTestStoreBtn').disabled = false;
+            document.getElementById('itemStoreBtn').disabled = false;
             
             // hide spinner
-            document.getElementById('crudTestStoreBtnSpinner').classList.add('hidden');
+            document.getElementById('itemStoreBtnSpinner').classList.add('hidden');
         });
 };
 </script>
 
 <template>
-    <Head title="Crud Test" />
+    <Head title="ITEM CREATE" />
 
     <div class="min-h-screen bg-gray-100">
             <!-- Page Heading -->
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <Link :href="route('web.crud.test.create')">
+                    <Link :href="route('web.item.create')">
                         <span>ITEM DETAIL</span>
                     </Link>
                     <span class="float-right">
-                        <Link :href="route('web.crud.test.index')">
+                        <Link :href="route('web.item.index')">
                             <Back />
                         </Link>
                     </span>
@@ -71,10 +71,10 @@ const submitCrudTest = async () => {
                             <div class="relative overflow-x">
                                 <div class="p-4">
                                     <p>NAME</p>
-                                    <input type="text" v-model="crudTest.name" class="w-full border rounded-md p-2 focus:outline-none focus:border-blue-500" />
-                                    <div v-if="crudTestErrors.name">
+                                    <input type="text" v-model="item.name" class="w-full border rounded-md p-2 focus:outline-none focus:border-blue-500" />
+                                    <div v-if="itemErrors.name">
                                         <ul class="text-red-500">
-                                            <li v-for="value, key in crudTestErrors.name" :key="key">
+                                            <li v-for="value, key in itemErrors.name" :key="key">
                                             {{ value }}
                                             </li>
                                         </ul>
@@ -83,10 +83,10 @@ const submitCrudTest = async () => {
                                 
                                 <div class="p-4">
                                     <p>DESCRIPTION</p>
-                                    <input type="text" v-model="crudTest.description" class="w-full border rounded-md p-2 focus:outline-none focus:border-blue-500" />
-                                    <div v-if="crudTestErrors.description">
+                                    <input type="text" v-model="item.description" class="w-full border rounded-md p-2 focus:outline-none focus:border-blue-500" />
+                                    <div v-if="itemErrors.description">
                                         <ul class="text-red-500">
-                                            <li v-for="value, key in crudTestErrors.description" :key="key">
+                                            <li v-for="value, key in itemErrors.description" :key="key">
                                             {{ value }}
                                             </li>
                                         </ul>
@@ -94,21 +94,21 @@ const submitCrudTest = async () => {
                                 </div>
                                 
                                 <div class="p-4">
-                                    <input type="checkbox" v-model="crudTest.is_enabled" class="form-checkbox h-5 w-5 text-green-500" />
+                                    <input type="checkbox" v-model="item.is_enabled" class="form-checkbox h-5 w-5 text-green-500" />
                                     <span class="ml-3">IS ENABLED</span>
                                 </div>
                                 
                                 <div class="float-right m-4">
                                     <span class="p-2">
-                                        <Link href="/crud-test">
+                                        <Link :href="route('web.item.index')">
                                             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">CANCEL</button>
                                         </Link>
                                     </span>
                                     <span class="p-2">
-                                        <button id="crudTestStoreBtn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" @click="submitCrudTest()">
+                                        <button id="itemStoreBtn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" @click="submitItem()">
                                             SUBMIT
                                             &nbsp;
-                                            <Spinner id="crudTestStoreBtnSpinner" class="hidden" />
+                                            <Spinner id="itemStoreBtnSpinner" class="hidden" />
                                         </button>
                                     </span>
                                 </div>
