@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Item\DeleteRequest;
 use App\Http\Requests\Item\StoreRequest;
 use App\Http\Requests\Item\UpdateRequest;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ItemController extends Controller
@@ -23,7 +22,7 @@ class ItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         $items = $this->modelService->get();
 
@@ -76,7 +75,12 @@ class ItemController extends Controller
         return;
     }
 
-    public function edit(Request $request, $id)
+    /**
+     * Display the form for editing an existing resource.
+     *
+     * @return \Inertia\Inertia
+     */
+    public function edit($id)
     {
         $item = $this->modelService->find($id);
 
