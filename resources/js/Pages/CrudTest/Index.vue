@@ -1,11 +1,12 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import Add from '@/Icons/Add.vue';
 import Delete from '@/Icons/Delete.vue';
 import Edit from '@/Icons/Edit.vue';
 
 defineProps({
     crudTest: Array|Object,
+    flash: Array|Object,
 });
 </script>
 
@@ -17,13 +18,29 @@ defineProps({
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     ITEM LIST
-                    <span class="float-right"><Add /></span>
+                    <span class="float-right">
+                        <Link href="/crud-test/create">
+                            <Add />
+                        </Link>
+                    </span>
                 </div>
             </header>
 
             <!-- Page Content -->
             <main>
-                <div class="py-12">
+                <div v-if="flash.message" class="mt-8">    
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="relative overflow-x">
+                            <div class="bg-green-500 text-white px-4 py-3 flex items-center justify-between" role="alert">
+                                <div class="flex">
+                                    <p>{{ flash.message }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="py-8">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                             <div class="relative overflow-x">
@@ -47,7 +64,7 @@ defineProps({
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody v-if="crudTest.length > 0">
                                         <tr class="bg-white border-b" v-for="value, key in crudTest" :key="key">
                                             <td class="px-6 py-4">{{ value.id }}</td>
                                             <td class="px-6 py-4">{{ value.name }}</td>
@@ -63,6 +80,11 @@ defineProps({
                                                     <td class="p-2"><Delete /></td>
                                                 </table>
                                             </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody v-else>
+                                        <tr class="bg-white border-b text-center">
+                                            <td class="px-6 py-4" colspan="5">NO DATA FOUND.</td>
                                         </tr>
                                     </tbody>
                                 </table>
