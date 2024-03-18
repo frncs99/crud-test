@@ -24,4 +24,5 @@ Route::as('web.crud.test.')
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
+        Route::delete('/{id}', 'destroy')->name('destroy');
     });
