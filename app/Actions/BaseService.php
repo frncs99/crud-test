@@ -20,4 +20,9 @@ class BaseService
     {
         $this->model = $model;
     }
+
+    public function get()
+    {
+        return $this->model->get();
+    }
 }

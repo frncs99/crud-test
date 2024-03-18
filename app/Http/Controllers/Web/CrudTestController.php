@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Web;
 
 use App\Actions\CrudTest\CrudTestService;
 use App\Http\Controllers\Controller;
+use App\Models\CrudTest;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CrudTestController extends Controller
 {
@@ -16,8 +18,12 @@ class CrudTestController extends Controller
         $this->modelService = $modelService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return;
+        $crudTest = $this->modelService->get();
+
+        return Inertia::render('CrudTest/Index', [
+            'crudTest' => $crudTest,
+        ]);
     }
 }
