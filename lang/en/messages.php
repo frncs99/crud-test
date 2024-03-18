@@ -19,6 +19,9 @@ return [
             'update' => 'Successfully updated item.',
             'destroy' => 'Successfully deleted item.',
         ],
+        'failed' => [
+            'destroy' => 'Failed deleting item.',
+        ],
     ],
 
 ];

@@ -55,4 +55,17 @@ class BaseService
 
         return $this->model;
     }
+
+    /**
+     * @return array
+     */
+    public function delete(string $id)
+    {
+        $record = $this->model->find($id);
+        if ($record) {
+            return $record->delete();
+        }
+
+        return false;
+    }
 }
