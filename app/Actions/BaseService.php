@@ -20,4 +20,14 @@ class BaseService
     {
         $this->model = $model;
     }
+
+    /**
+     * Retrieve all records from the database.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function get()
+    {
+        return $this->model->get();
+    }
 }
