@@ -5,7 +5,7 @@
 - NodeJS/NPM https://nodejs.org/en/download/
 
 #### GUIDE TO SETUP THE PROJECT:
-- Copy the .env.example file and rename it to the .env file (modify database and mail config first)
+- Copy the .env.example file and rename it to the .env file (modify database, etc.)
 - Execute the command `composer install` to insall the project dependencies
 - Execute the command `php artisan key:generate` to generate environment app key
 - Execute the command `php artisan migrate` to run the database migrations
